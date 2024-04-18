@@ -5,41 +5,24 @@ this module contains canUnlockAll methode
 
 
 def canUnlockAll(boxes):
-    '''
-    canUnlockAll methode
-    '''
-    open = True
-    testOpen = []
-    keys = []
-    keysImpo = []
-    for i in range(len(boxes)):
-        testOpen.append(0)
-    testOpen[0] = 1
-    for a in boxes[0]:
-        keys.append(a)
-        keysImpo.append(a)
-    for a in keys:
-        if a < len(testOpen):
-            testOpen[a] = 1
-    keys = []
-    for box_index in range(len(boxes)):
-        if box_index == 0:
-            continue
-        if testOpen[box_index] == 1:
-            for key in boxes[box_index]:
-                keys.append(key)
-                keysImpo.append(key)
-            for key in keys:
-                testOpen[key] = 1
-        else:
-            try:
-                idx = keysImpo[box_index]
-                for key in boxes[idx]:
-                    keys.append(key)
-                    for key in keys:
-                        testOpen[key] = 1
-            except Exception:
-                return False
+    """
+    Determines if all boxes can be unlocked.
+    """
+    unlocked = [False] * len(boxes)
+    unlocked[0] = True
+    keys = set(boxes[0])
 
-        keys = []
-    return open
+    keys_to_process = list(keys)
+
+    while keys_to_process:
+        current_key = keys_to_process.pop(0)
+
+        if current_key < len(boxes) and not unlocked[current_key]:
+            unlocked[current_key] = True
+            
+            for new_key in boxes[current_key]:
+                if new_key not in keys:
+                    keys.add(new_key)
+                    keys_to_process.append(new_key)
+
+    return all(unlocked)
