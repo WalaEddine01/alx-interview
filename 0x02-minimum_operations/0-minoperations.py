@@ -8,15 +8,22 @@ def minOperations(n: int) -> int:
     """
     this is the minOperations method
     """
+    if n <= 0:
+        return 0
     op = 0
     num = n
-    while True:
+    k = []
+    while num > 1:
         if isPrime(int(num)):
-            op = (op * 2) + int(num)
-            return op
+            k.append(int(num))
+            break
         else:
-            op = op + 1
-            num = int(num / 2)
+            for i in range(2, num + 1):
+                if num % i == 0:
+                    num = int(num / i)
+                    k.append(i)
+                    break
+    return sum(k)
 
 
 def isPrime(n: int) -> bool:
@@ -26,7 +33,7 @@ def isPrime(n: int) -> bool:
     if n == 2 or n == 1:
         return True
     for i in range(1, n):
-        if i != 1 and i != n and n % 2 == 0:
+        if i != 1 and i != n and n % i == 0:
             return False
 
     return True
