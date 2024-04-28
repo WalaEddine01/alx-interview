@@ -26,7 +26,7 @@ def isPrime(n: int) -> bool:
     if n == 2 or n == 1:
         return True
     for i in range(1, n):
-        if i != 1 and i != n and i % n == 0:
+        if i != 1 and i != n and n % i == 0:
             return False
 
     return True
