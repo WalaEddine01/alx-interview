@@ -29,8 +29,6 @@ try:
             for code in set(data):
                 print("{}: {}".format(code, data.count(code)))
 except KeyboardInterrupt:
-    pass
-finally:
     print("File size: " + str(sum))
     data.sort()
     for code in set(data):
