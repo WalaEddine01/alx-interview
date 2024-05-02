@@ -28,8 +28,6 @@ try:
             data.sort()
             for code in set(data):
                 print("{}: {}".format(code, data.count(code)))
-            sum = 0
-            data = []
 except KeyboardInterrupt:
     print("File size:", sum)
     data.sort()
