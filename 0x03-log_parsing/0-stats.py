@@ -14,6 +14,7 @@ pat = (
 
 data = []
 sum = 0
+c = 0
 
 try:
     for line in sys.stdin:
@@ -22,7 +23,9 @@ try:
             data.append(match.group(1))
             file_size = int(match.group(2))
             sum += file_size
-        if len(data) % 10 == 0:
+            c += 1
+        if c == 10:
+            c = 0
             print("File size: {}".format(sum))
             data.sort()
             for code in ["200", "301", "400", "401", "403",
