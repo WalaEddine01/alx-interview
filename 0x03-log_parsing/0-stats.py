@@ -18,10 +18,10 @@ c = 0
 
 try:
     for line in sys.stdin:
-        match = re.match(pat, line)
-        if match:
-            data.append(match.group(1))
-            file_size = int(match.group(2))
+        Match = re.match(pat, line)
+        if Match:
+            data.append(Match.group(1))
+            file_size = int(Match.group(2))
             sum += file_size
             c += 1
         if c == 10:
