@@ -17,7 +17,7 @@ sum = 0
 
 try:
     for line in sys.stdin:
-        match = re.match(pat, line)
+        match = int(re.match(pat, line))
         if match:
             data.append(int(match.group(1)))
             response_size = int(match.group(2))
