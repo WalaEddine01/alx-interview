@@ -29,6 +29,7 @@ try:
                 print("{}: {}".format(code, data.count(code)))
 except KeyboardInterrupt:
     pass
+
 finally:
     print("File size:", str(sum))
     data.sort()
