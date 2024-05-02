@@ -29,7 +29,8 @@ try:
                          "404", "405", "500"]:
                 if code in data:
                     print("{}: {}".format(code, data.count(code)))
-except KeyboardInterrupt:
+
+except Exception as err:
     pass
 
 finally:
