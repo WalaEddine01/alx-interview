@@ -13,6 +13,7 @@ pat = (
 )
 
 data = []
+data2 = ["200", "301", "400", "401", "403", "404", "405", "500"]
 sum = 0
 c = 0
 
@@ -20,7 +21,8 @@ try:
     for line in sys.stdin:
         Match = re.match(pat, line)
         if Match:
-            data.append(Match.group(1))
+            if Match.group(1) in data2:
+                data.append(Match.group(1))
             file_size = int(Match.group(2))
             sum += file_size
             c += 1
