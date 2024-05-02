@@ -25,13 +25,16 @@ try:
         if len(data) % 10 == 0:
             print("File size: {}".format(sum))
             data.sort()
-            for code in set(data):
-                print("{}: {}".format(code, data.count(code)))
+            for code in ["200", "301", "400", "401", "403",
+                         "404", "405", "500"]:
+                if code in data:
+                    print("{}: {}".format(code, data.count(code)))
 except KeyboardInterrupt:
     pass
 
 finally:
     print("File size:", str(sum))
     data.sort()
-    for code in set(data):
-        print("{}: {}".format(code, data.count(code)))
+    for code in ["200", "301", "400", "401", "403", "404", "405", "500"]:
+        if code in data:
+            print("{}: {}".format(code, data.count(code)))
