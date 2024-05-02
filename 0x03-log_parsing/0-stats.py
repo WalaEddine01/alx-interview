@@ -33,7 +33,7 @@ except KeyboardInterrupt:
     pass
 
 finally:
-    print("File size:", str(sum))
+    print("File size: {}".format(sum))
     data.sort()
     for code in ["200", "301", "400", "401", "403", "404", "405", "500"]:
         if code in data:
