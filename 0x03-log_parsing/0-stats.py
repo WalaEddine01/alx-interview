@@ -3,7 +3,6 @@
 This script reads from standard input and computes metrics
 """
 import re
-import signal
 import sys
 
 
