@@ -20,7 +20,7 @@ try:
         match = re.match(pat, line)
         if match:
             data.append(match.group(1))
-            response_size = match.group(2)
+            response_size = int(match.group(2))
             sum += response_size
         if len(data) % 10 == 0:
             print("File size: {}".format(sum))
