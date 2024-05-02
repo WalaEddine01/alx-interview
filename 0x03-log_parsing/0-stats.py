@@ -20,8 +20,8 @@ try:
         match = re.match(pat, line)
         if match:
             data.append(match.group(1))
-            response_size = int(match.group(2))
-            sum += response_size
+            file_size = int(match.group(2))
+            sum += file_size
         if len(data) % 10 == 0:
             print("File size: {}".format(sum))
             data.sort()
@@ -29,8 +29,7 @@ try:
                          "404", "405", "500"]:
                 if code in data:
                     print("{}: {}".format(code, data.count(code)))
-
-except Exception as err:
+except KeyboardInterrupt:
     pass
 
 finally:
