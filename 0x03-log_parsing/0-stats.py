@@ -5,7 +5,7 @@ This script reads from standard input and computes metrics
 import re
 import sys
 
-
+# Define the regex pattern
 pat = (
     r'[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ - \[[0-9]+-[0-9]+-[0-9]+ '
     r'[0-9]+:[0-9]+:[0-9]+\.[0-9]+\] "GET /projects/260 HTTP/1\.1" '
@@ -13,32 +13,44 @@ pat = (
 )
 
 data = []
-sum = 0
-c = 0
+total_size = 0
+count = 0
 
 try:
     for line in sys.stdin:
         match = re.match(pat, line)
         if match:
-            data.append(match.group(1))
+            # Extract status code and file size
+            status_code = match.group(1)
             file_size = int(match.group(2))
-            sum += file_size
-            c += 1
-        if c == 10:
-            c = 0
-            print("File size: {}".format(sum))
-            data.sort()
-            for code in ["200", "301", "400", "401", "403",
-                         "404", "405", "500"]:
-                if code in data:
-                    print("{}: {}".format(code, data.count(code)))
+            # Update total size and count
+            total_size += file_size
+            count += 1
+            # Append status code to data list
+            data.append(status_code)
+
+            # Print statistics after every 10 lines
+            if count == 10:
+                print("File size:", total_size)
+                # Sort the data list
+                data.sort()
+                # Print status codes
+                for code in ["200", "301", "400", "401", "403",
+                             "404", "405", "500"]:
+                    if code in data:
+                        print("{}: {}".format(code, data.count(code)))
+                # Reset count and clear data list
+                count = 0
+                data.clear()
+
 except KeyboardInterrupt:
+    # Handle KeyboardInterrupt gracefully
     pass
 
 finally:
-    print("File size: {}".format(sum))
+    # Print final statistics
+    print("File size:", total_size)
     data.sort()
-    for code in ["200", "301", "400", "401", "403",
-                 "404", "405", "500"]:
+    for code in ["200", "301", "400", "401", "403", "404", "405", "500"]:
         if code in data:
             print("{}: {}".format(code, data.count(code)))
