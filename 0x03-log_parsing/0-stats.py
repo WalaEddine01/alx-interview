@@ -32,7 +32,6 @@ try:
 except KeyboardInterrupt:
     pass
 
-
 finally:
     print("File size: {}".format(sum))
     data.sort()
