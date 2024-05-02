@@ -19,7 +19,7 @@ try:
     for line in sys.stdin:
         match = re.match(pat, line)
         if match:
-            data.append(int(match.group(1)))
+            data.append(match.group(1))
             response_size = int(match.group(2))
             sum += response_size
         if len(data) % 10 == 0:
