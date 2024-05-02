@@ -24,13 +24,14 @@ try:
             response_size = int(match.group(2))
             sum += response_size
         if len(data) % 10 == 0:
-            print("File size:", sum)
+            print("File size: " + str(sum))
             data.sort()
             for code in set(data):
                 print("{}: {}".format(code, data.count(code)))
 except KeyboardInterrupt:
-    print("File size:", sum)
+    pass
+finally:
+    print("File size: " + str(sum))
     data.sort()
     for code in set(data):
         print("{}: {}".format(code, data.count(code)))
-    sys.exit(0)
