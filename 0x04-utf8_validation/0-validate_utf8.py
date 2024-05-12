@@ -2,9 +2,10 @@
 """
 This Module contains the validUTF8 method
 """
+from typing import List
 
 
-def validUTF8(data):
+def validUTF8(data: List[int]) -> bool:
     """
     validUTF8 Method
     """
