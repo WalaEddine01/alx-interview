@@ -20,6 +20,7 @@ request(url, (error, response, body) => {
     const lastNumber = match[1];
     numbers.push(lastNumber);
   }
+  numbers.sort((a, b) => a - b);
   for (const j of numbers) {
     request(urlPeople.replace(i, j), (error, response, body) => {
       if (error) {
