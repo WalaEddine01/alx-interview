@@ -1,25 +1,32 @@
 #!/usr/bin/node
+const argv = require('process').argv;
 const request = require('request');
-const API_URL = 'https://swapi-api.hbtn.io/api';
 
-if (process.argv.length > 2) {
-  request(`${API_URL}/films/${process.argv[2]}/`, (err, _, body) => {
-    if (err) {
-      console.log(err);
-    }
-    const charactersURL = JSON.parse(body).characters;
-    const charactersName = charactersURL.map(
-      url => new Promise((resolve, reject) => {
-        request(url, (promiseErr, __, charactersReqBody) => {
-          if (promiseErr) {
-            reject(promiseErr);
-          }
-          resolve(JSON.parse(charactersReqBody).name);
-        });
-      }));
+const endPointFilms = 'films'; const id = argv[2]; const endPointPeople = 'people'; const i = 1;
+const url = `https://swapi-api.alx-tools.com/api/${endPointFilms}/${id}/`;
+const urlPeople = `https://swapi-api.alx-tools.com/api/${endPointPeople}/${i}/`;
+const regex = /\/(\d+)\/$/;
 
-    Promise.all(charactersName)
-      .then(names => console.log(names.join('\n')))
-      .catch(allErr => console.log(allErr));
-  });
-}
+request(url, (error, response, body) => {
+  if (error) {
+    console.error('Error with GET request:', error);
+    return;
+  }
+
+  const characters = JSON.parse(body).characters;
+  const numbers = [];
+  for (const c of characters) {
+    const match = c.match(regex);
+    const lastNumber = match[1];
+    numbers.push(lastNumber);
+  }
+  for (const j of numbers) {
+    request(urlPeople.replace(i, j), (error, response, body) => {
+      if (error) {
+        console.error('Error with GET request:', error);
+        return;
+      }
+      console.log(JSON.parse(body).name);
+    });
+  }
+});
