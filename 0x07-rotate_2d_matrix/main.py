@@ -12,3 +12,4 @@ if __name__ == "__main__":
     rotate_2d_matrix(matrix)
     for row in matrix:
         print(row)
+        
