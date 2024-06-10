@@ -14,7 +14,9 @@ def makeChange(coins, total):
     i = 0
     j = 1
     coins.sort()
-    if change <= 0 or len(coins) == 0:
+    if len(coins) == 0:
+        return -1
+    if change <= 0:
         return 0
     while j <= len(coins):
         i = 0
