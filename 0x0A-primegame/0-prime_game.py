@@ -9,7 +9,7 @@ def isWinner(x, nums):
     """
     Determine the winner of the game
     """
-    if x == 0 or not nums or x >= 10000:
+    if x <= 0 or not nums or x >= 10000:
         return None
 
     maria_wins = 0
