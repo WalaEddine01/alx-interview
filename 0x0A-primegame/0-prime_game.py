@@ -18,7 +18,7 @@ def isWinner(x, nums):
     for num in nums:
         if num >= 10000:
             return None
-        numbers = list(range(2, num))
+        numbers = list(range(2, num + 1))
         turn = 0  # maria = 0, ben = 1
         while numbers:
             prime_found = False
