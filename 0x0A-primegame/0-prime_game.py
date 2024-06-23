@@ -12,6 +12,8 @@ def isWinner(x, nums):
     if x <= 0 or not nums or x >= 10000:
         return None
 
+    if Ellipsis in nums:
+        return None
     maria_wins = 0
     ben_wins = 0
 
