@@ -9,7 +9,7 @@ def isWinner(x, nums):
     """
     Determine the winner of the game
     """
-    if x <= 0 or not nums or x - 1 >= 10000:
+    if x <= 0 or not nums or x >= 10000:
         return None
 
     maria_wins = 0
@@ -23,6 +23,8 @@ def isWinner(x, nums):
         while numbers:
             prime_found = False
             for n in numbers:
+                if n >= 10000:
+                    return None
                 if isPrime(n):
                     prime_found = True
                     numbers = [x for x in numbers if x % n != 0]
